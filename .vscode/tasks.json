@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "group": "test",
+      "label": "Run single test from open active file",
+      "type": "shell",
+      "command": "./.vscode/run-test.exs open_active_file ${workspaceRoot} ${file}"
+    },
+    {
+      "group": "test",
+      "label": "Run all tests",
+      "type": "shell",
+      "command": "./.vscode/run-test.exs all"
+    }
+  ]
+}
