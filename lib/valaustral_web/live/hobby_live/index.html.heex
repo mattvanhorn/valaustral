@@ -1,0 +1,36 @@
+<h1>Listing Hobbies</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal ValaustralWeb.HobbyLive.FormComponent,
+    id: @hobby.id || :new,
+    title: @page_title,
+    action: @live_action,
+    hobby: @hobby,
+    current_user: @current_user,
+    return_to: Routes.hobby_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="hobbies">
+    <%= for hobby <- @hobbies do %>
+      <tr id={"hobby-#{hobby.id}"}>
+        <td><%= hobby.name %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.hobby_show_path(@socket, :show, hobby) %></span>
+          <span><%= live_patch "Edit", to: Routes.hobby_index_path(@socket, :edit, hobby) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: hobby.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Hobby", to: Routes.hobby_index_path(@socket, :new) %></span>

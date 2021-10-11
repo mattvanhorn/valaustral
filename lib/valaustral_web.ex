@@ -47,6 +47,7 @@ defmodule ValaustralWeb do
       use Phoenix.LiveView,
         layout: {ValaustralWeb.LayoutView, "live.html"}
 
+      on_mount ValaustralWeb.UserLiveAuth
       unquote(view_helpers())
     end
   end
@@ -83,6 +84,7 @@ defmodule ValaustralWeb do
 
       # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
       import Phoenix.LiveView.Helpers
+      import ValaustralWeb.LiveHelpers
 
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View

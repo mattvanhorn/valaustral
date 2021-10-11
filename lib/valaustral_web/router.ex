@@ -77,6 +77,13 @@ defmodule ValaustralWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+
+    live "/hobbies", HobbyLive.Index, :index
+    live "/hobbies/new", HobbyLive.Index, :new
+    live "/hobbies/:id/edit", HobbyLive.Index, :edit
+
+    live "/hobbies/:id", HobbyLive.Show, :show
+    live "/hobbies/:id/show/edit", HobbyLive.Show, :edit
   end
 
   scope "/", ValaustralWeb do

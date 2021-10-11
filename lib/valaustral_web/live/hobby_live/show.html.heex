@@ -1,0 +1,23 @@
+<h1>Show Hobby</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal ValaustralWeb.HobbyLive.FormComponent,
+    id: @hobby.id,
+    title: @page_title,
+    action: @live_action,
+    hobby: @hobby,
+    current_user: @current_user,
+    return_to: Routes.hobby_show_path(@socket, :show, @hobby) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @hobby.name %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.hobby_show_path(@socket, :edit, @hobby), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.hobby_index_path(@socket, :index) %></span>
