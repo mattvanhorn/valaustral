@@ -1,0 +1,39 @@
+<h1>Listing Suggestions</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal ValaustralWeb.SuggestionLive.FormComponent,
+    id: @suggestion.id || :new,
+    title: @page_title,
+    action: @live_action,
+    suggestion: @suggestion,
+    return_to: Routes.suggestion_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Done</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="suggestions">
+    <%= for suggestion <- @suggestions do %>
+      <tr id={"suggestion-#{suggestion.id}"}>
+        <td><%= suggestion.title %></td>
+        <td><%= suggestion.body %></td>
+        <td><%= suggestion.done %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.suggestion_show_path(@socket, :show, suggestion) %></span>
+          <span><%= live_patch "Edit", to: Routes.suggestion_index_path(@socket, :edit, suggestion) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: suggestion.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Suggestion", to: Routes.suggestion_index_path(@socket, :new) %></span>

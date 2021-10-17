@@ -11,7 +11,7 @@ defmodule Valaustral.HobbiesTest do
 
     @invalid_attrs %{name: nil}
 
-    test "list_hobbies/0 returns all hobbies" do
+    test "list_user_hobbies/1 returns all hobbies" do
       user = user_fixture()
       hobby = hobby_fixture(%{user_id: user.id})
       assert Hobbies.list_user_hobbies(user) == [hobby]
@@ -37,7 +37,7 @@ defmodule Valaustral.HobbiesTest do
 
     test "update_hobby/2 with valid data updates the hobby" do
       user = user_fixture()
-      hobby = hobby_fixture(%{user_id: user.id})
+      hobby = hobby_fixture(%{user: user})
       update_attrs = %{name: "some updated name"}
 
       assert {:ok, %Hobby{} = hobby} = Hobbies.update_hobby(hobby, update_attrs)
@@ -46,7 +46,7 @@ defmodule Valaustral.HobbiesTest do
 
     test "update_hobby/2 with invalid data returns error changeset" do
       user = user_fixture()
-      hobby = hobby_fixture(%{user_id: user.id})
+      hobby = hobby_fixture(%{user: user})
       assert {:error, %Ecto.Changeset{}} = Hobbies.update_hobby(hobby, @invalid_attrs)
       assert hobby == Hobbies.get_hobby!(hobby.id)
     end

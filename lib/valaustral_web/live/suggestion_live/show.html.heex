@@ -1,0 +1,32 @@
+<h1>Show Suggestion</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal ValaustralWeb.SuggestionLive.FormComponent,
+    id: @suggestion.id,
+    title: @page_title,
+    action: @live_action,
+    suggestion: @suggestion,
+    return_to: Routes.suggestion_show_path(@socket, :show, @suggestion) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @suggestion.title %>
+  </li>
+
+  <li>
+    <strong>Body:</strong>
+    <%= @suggestion.body %>
+  </li>
+
+  <li>
+    <strong>Done:</strong>
+    <%= @suggestion.done %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.suggestion_show_path(@socket, :edit, @suggestion), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.suggestion_index_path(@socket, :index) %></span>

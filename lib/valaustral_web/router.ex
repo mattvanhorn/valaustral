@@ -84,6 +84,13 @@ defmodule ValaustralWeb.Router do
 
     live "/hobbies/:id", HobbyLive.Show, :show
     live "/hobbies/:id/show/edit", HobbyLive.Show, :edit
+
+    live "/suggestions", SuggestionLive.Index, :index
+    live "/suggestions/new", SuggestionLive.Index, :new
+    live "/suggestions/:id/edit", SuggestionLive.Index, :edit
+
+    live "/suggestions/:id", SuggestionLive.Show, :show
+    live "/suggestions/:id/show/edit", SuggestionLive.Show, :edit
   end
 
   scope "/", ValaustralWeb do
